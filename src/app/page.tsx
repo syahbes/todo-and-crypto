@@ -1,9 +1,9 @@
-import Crypto from "@/components/crypto";
 import TodoList from "@/components/todoList";
+import CryptoDisplay from "@/components/cryptoDisplay";
 import PageFooter from "@/components/footer";
 import HeroHeader from "@/components/heroHeader";
-import Grid from '@mui/material/Grid2';
-import Box from '@mui/material/Box';
+import Grid from "@mui/material/Grid2";
+import Box from "@mui/material/Box";
 import "@/styles/main.css";
 
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
             <TodoList />
           </Grid>
           <Grid size={{ xs: 12, md: 8 }}>
-            <Crypto />
+            <CryptoDisplay />
           </Grid>
         </Grid>
       </Box>

@@ -81,8 +81,8 @@ export default function TodoList() {
   return (
     <Container maxWidth="md">
       <Card sx={{ mt: 1, p: 1, mb: 4 }}>
-        <Typography variant="h5" fontWeight="bold" textAlign="center">
-          Todo List
+        <Typography variant="h6" fontWeight="bold" textAlign="center">
+          JsonPlaceholder: Todo's
         </Typography>
       </Card>
 
