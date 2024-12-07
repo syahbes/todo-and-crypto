@@ -1,6 +1,5 @@
-import { Box, Container, Grid2, Paper } from "@mui/material";
 import Crypto from "@/components/crypto";
-import Todo from "@/components/todo";
+import TodoList from "@/components/todoList";
 import PageFooter from "@/components/footer";
 import HeroHeader from "@/components/heroHeader";
 import "@/styles/main.css";
@@ -12,7 +11,7 @@ export default function Home() {
         <HeroHeader />
       </header>
       <section className="page-section">
-        <Todo />
+        <TodoList />
         <Crypto />
       </section>
       <PageFooter />

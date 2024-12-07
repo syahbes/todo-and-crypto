@@ -11,7 +11,7 @@ export interface TodosState {
 }
 
 const initialState: TodosState = {
-  todos: [{ id: "1", title: "example", done: false }],
+  todos: [{ id: "1", title: "example", completed: false }],
   loading: false,
   error: null,
 };
@@ -49,7 +49,7 @@ export function fetchTodosAsync() {
     dispatch(fetchTodos());
     try {
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos"
+        "https://jsonplaceholder.typicode.com/todos?_limit=5"
       );
       const data = await response.json();
       dispatch(fetchTodosSuccess(data));
