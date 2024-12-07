@@ -1,25 +1,24 @@
-'use client';
-import { createTheme } from '@mui/material/styles';
+"use client";
+import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   // cssVariables: true,
   typography: {
-    fontFamily: 'var(--font-roboto)',
+    fontFamily: "var(--font-roboto)",
   },
   palette: {
     primary: {
-      main: '#2198CE',
+      main: "#2198CE",
     },
-    secondary: {  
-      main: '#F7FBFF',
+    secondary: {
+      main: "#F7FBFF",
     },
     text: {
-      primary: '#171717',
-      secondary: '#FFF',
-
+      primary: "#171717",
+      secondary: "#8A8B8D",
     },
     background: {
-      default: '#F7FBFF',
+      default: "#F7FBFF",
     },
   },
 });

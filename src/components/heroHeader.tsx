@@ -22,7 +22,7 @@ export default function HeroHeader() {
           fontWeight: 900,
           fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
         }}
-        color="text.secondary"
+        color="primary.contrastText"
         mb={0}
         gutterBottom>
         Financer.com
@@ -33,7 +33,7 @@ export default function HeroHeader() {
           fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
         }}
         mb={2}
-        color="text.secondary">
+        color="primary.contrastText">
         Interview Exam
       </Typography>
       <Typography
@@ -42,7 +42,7 @@ export default function HeroHeader() {
           fontSize: { xs: "0.75rem", sm: "0.875rem", md: "1rem" },
           fontStyle: "italic",
         }}
-        color="text.secondary"
+        color="primary.contrastText"
         gutterBottom
         mb={0}>
         Candidate: Shlomi Yahbes

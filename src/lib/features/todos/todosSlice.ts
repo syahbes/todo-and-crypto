@@ -1,5 +1,3 @@
-//todo slice
-
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/lib/store";
 import { Todo } from "@/types/index";
@@ -11,7 +9,7 @@ export interface TodosState {
 }
 
 const initialState: TodosState = {
-  todos: [{ id: "1", title: "example", completed: false }],
+  todos: [],
   loading: false,
   error: null,
 };
@@ -33,29 +31,43 @@ export const todosSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    addTodo: (state, action: PayloadAction<Todo>) => {
+      state.todos.push(action.payload);
+    },
+    toggleTodo: (state, action: PayloadAction<string>) => {
+      const todo = state.todos.find((todo) => todo.id === action.payload);
+      if (todo) {
+        todo.completed = !todo.completed;
+      }
+    },
   },
 });
 
-export const { fetchTodos, fetchTodosSuccess, fetchTodosFailure } =
-  todosSlice.actions;
+export const {
+  fetchTodos,
+  fetchTodosSuccess,
+  fetchTodosFailure,
+  addTodo,
+  toggleTodo,
+} = todosSlice.actions;
+
 export const selectTodos = (state: RootState) => state.todos.todos;
 export const selectTodosLoading = (state: RootState) => state.todos.loading;
 export const selectTodosError = (state: RootState) => state.todos.error;
 
 export default todosSlice.reducer;
 
+// Async thunks
 export function fetchTodosAsync() {
   return async (dispatch: any) => {
     dispatch(fetchTodos());
     try {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos?_limit=5"
-      );
+      const response = await fetch("/api/todos");
       const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
       dispatch(fetchTodosSuccess(data));
-    } catch (error) {
-      //   dispatch(fetchTodosFailure(error.message));
-      console.log("error", error);
+    } catch (error: any) {
+      dispatch(fetchTodosFailure(error.message));
     }
   };
 }

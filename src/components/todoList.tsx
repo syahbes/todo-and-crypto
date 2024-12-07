@@ -1,6 +1,10 @@
 "use client";
-import { useActionState, useEffect, useState } from "react";
-import { fetchTodosAsync } from "@/lib/features/todos/todosSlice";
+import { useEffect, useState } from "react";
+import {
+  fetchTodosAsync,
+  addTodo,
+  toggleTodo,
+} from "@/lib/features/todos/todosSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/lib/store";
 import {
@@ -23,67 +27,65 @@ export default function TodoList() {
   const todos = useSelector(
     (state: { todos: { todos: Todo[] } }) => state.todos.todos
   );
+  const loading = useSelector(
+    (state: { todos: { loading: boolean } }) => state.todos.loading
+  );
+  const error = useSelector(
+    (state: { todos: { error: string | null } }) => state.todos.error
+  );
   const [filter, setFilter] = useState<"ALL" | "COMPLETED" | "INCOMPLETE">(
     "ALL"
   );
-
-  const [error, submitAction, isPending] = useActionState(
-    async (_previousState: any, formData: any) => {
-      console.log("will submit", formData.get("newTask"));
-      const error = await addNewTask(formData.get("newTask"));
-      if (error) {
-        return error;
-      }
-      return null;
-    },
-    null
-  );
+  const [newTask, setNewTask] = useState("");
 
   useEffect(() => {
     dispatch(fetchTodosAsync());
   }, [dispatch]);
 
   const filteredTasks = todos.filter((todo) => {
-    if (filter === "COMPLETED") {
-      return todo.completed;
-    } else if (filter === "INCOMPLETE") {
-      return !todo.completed;
-    }
+    if (filter === "COMPLETED") return todo.completed;
+    if (filter === "INCOMPLETE") return !todo.completed;
     return true;
   });
 
-  const handleToggleTask = async (id: string) => {
-    console.log("toggle task", id);
+  const handleToggleTask = (id: string) => {
+    dispatch(toggleTodo(id));
   };
 
-  const addNewTask = async (newTask: string) => {
-    if (!newTask) {
-      return "Please enter a task";
-    }
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/todos?_limit=5",
-      {
+  const handleAddTask = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newTask.trim()) return;
+
+    try {
+      const response = await fetch("/api/todos", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           title: newTask,
           completed: false,
         }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      }
-    );
-    const data = await response.json();
-    return null;
+      });
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+
+      dispatch(addTodo(data));
+      setNewTask("");
+    } catch (error) {
+      console.error("Failed to add todo:", error);
+    }
   };
 
   return (
     <Container maxWidth="md">
       <Card sx={{ mt: 1, p: 1, mb: 4 }}>
-        <Typography variant="h5" fontWeight={"bold"} textAlign={"center"}>
-          JsonPlaceholder: Todo's
+        <Typography variant="h5" fontWeight="bold" textAlign="center">
+          Todo List
         </Typography>
       </Card>
+
       <Box sx={{ mb: 3, display: "flex", justifyContent: "center" }}>
         <ButtonGroup variant="contained" aria-label="task filter button group">
           <Button
@@ -103,12 +105,14 @@ export default function TodoList() {
           </Button>
         </ButtonGroup>
       </Box>
-      <form action={submitAction} style={{ marginBottom: "1rem" }}>
+
+      <form onSubmit={handleAddTask} style={{ marginBottom: "1rem" }}>
         <Box sx={{ display: "flex", gap: 1, width: "100%" }}>
           <TextField
             size="small"
             placeholder="New Task"
-            name="newTask"
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
             sx={{ flex: 1 }}
           />
           <Button variant="contained" type="submit">
@@ -116,8 +120,9 @@ export default function TodoList() {
           </Button>
         </Box>
       </form>
+
       {error && <Typography color="error">{error}</Typography>}
-      {isPending && <Typography>Loading...</Typography>}
+      {loading && <Typography>Loading...</Typography>}
 
       <List sx={{ p: 0 }}>
         {filteredTasks.map((task) => (
