@@ -1,28 +1,21 @@
-"use client";
-import { fetchTodosAsync } from "@/lib/features/todos/todosSlice";
-import { Todo } from "@/types";
-import { Typography, Button } from "@mui/material";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { AppDispatch } from '@/lib/store';
+import { Box, Container, Grid2, Paper } from "@mui/material";
+import Crypto from "@/components/crypto";
+import Todo from "@/components/todo";
+import PageFooter from "@/components/footer";
+import HeroHeader from "@/components/heroHeader";
+import "@/styles/index.css";
 
 export default function Home() {
-  const dispatch = useDispatch<AppDispatch>();  // Example of accessing state
-  const todos = useSelector(
-    (state: { todos: { todos: Todo[] } }) => state.todos.todos
-  );
-
-  useEffect(() => {
-    dispatch(fetchTodosAsync());
-  }, [dispatch]);
-
   return (
-    <div>
-      <Typography variant="h1">Hello</Typography>
-      <Button variant="contained">Button</Button>
-      {todos.map((todo) => (
-        <div key={todo.id}>{todo.title}</div>
-      ))}
-    </div>
+    <main className="page">
+      <header>
+        <HeroHeader />
+      </header>
+      <section className="page-section">
+        <Todo />
+        <Crypto />
+        <PageFooter />
+      </section>
+    </main>
   );
 }

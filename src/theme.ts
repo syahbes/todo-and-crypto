@@ -10,6 +10,14 @@ const theme = createTheme({
     primary: {
       main: '#2198CE',
     },
+    text: {
+      // primary: '#171717',
+      secondary: '#FFF',
+
+    },
+    background: {
+      default: '#F7FBFF',
+    },
   },
 });
 

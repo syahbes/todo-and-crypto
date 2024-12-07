@@ -9,7 +9,7 @@ import theme from "@/theme";
 import StoreProvider from "@/app/StoreProvider";
 
 const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
+  weight: ["300", "400", "500", "700", "900"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-roboto",
