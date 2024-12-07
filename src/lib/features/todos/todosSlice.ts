@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/lib/store";
 import { Todo } from "@/types/index";
 
@@ -14,23 +14,29 @@ const initialState: TodosState = {
   error: null,
 };
 
+// Create async thunk
+export const fetchTodosAsync = createAsyncThunk(
+  "todos/fetchTodos",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch("/api/todos");
+      const data = await response.json();
+
+      if (!response.ok) {
+        return rejectWithValue(data.error);
+      }
+
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const todosSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
-    fetchTodos: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    fetchTodosSuccess: (state, action: PayloadAction<Todo[]>) => {
-      state.loading = false;
-      state.error = null;
-      state.todos = action.payload;
-    },
-    fetchTodosFailure: (state, action: PayloadAction<string>) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
     addTodo: (state, action: PayloadAction<Todo>) => {
       state.todos.push(action.payload);
     },
@@ -41,33 +47,30 @@ export const todosSlice = createSlice({
       }
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTodosAsync.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchTodosAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.todos = action.payload;
+        state.error = null;
+      })
+      .addCase(fetchTodosAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
+  },
 });
 
-export const {
-  fetchTodos,
-  fetchTodosSuccess,
-  fetchTodosFailure,
-  addTodo,
-  toggleTodo,
-} = todosSlice.actions;
+// Regular actions
+export const { addTodo, toggleTodo } = todosSlice.actions;
 
+// Selectors
 export const selectTodos = (state: RootState) => state.todos.todos;
 export const selectTodosLoading = (state: RootState) => state.todos.loading;
 export const selectTodosError = (state: RootState) => state.todos.error;
 
 export default todosSlice.reducer;
-
-// Async thunks
-export function fetchTodosAsync() {
-  return async (dispatch: any) => {
-    dispatch(fetchTodos());
-    try {
-      const response = await fetch("/api/todos");
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error);
-      dispatch(fetchTodosSuccess(data));
-    } catch (error: any) {
-      dispatch(fetchTodosFailure(error.message));
-    }
-  };
-}

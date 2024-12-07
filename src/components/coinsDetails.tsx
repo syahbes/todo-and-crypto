@@ -18,7 +18,12 @@ export default function CoinsDetails({ coins }: { coins: Coin[] }) {
             <ListItemText
               primary={`${coin.name} (${coin.symbol})`}
               secondary={`
-                Price: ${coin.price} | Market Cap: ${coin.market_cap} | Volume 24h: ${coin.volume_24h} | Percent Change 24h: ${coin.percent_change_24h}
+                Price: ${coin.price.toFixed(
+                  2
+                )}$ | Market Cap: ${coin.market_cap.toFixed(
+                2
+              )} | Volume 24h: ${coin.volume_24h.toFixed(2)}  
+               | Percent Change 24h: ${coin.percent_change_24h.toFixed(2) + "%"}
                 `}
             />
           </ListItem>
