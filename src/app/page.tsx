@@ -3,7 +3,7 @@ import Crypto from "@/components/crypto";
 import Todo from "@/components/todo";
 import PageFooter from "@/components/footer";
 import HeroHeader from "@/components/heroHeader";
-import "@/styles/index.css";
+import "@/styles/main.css";
 
 export default function Home() {
   return (
@@ -14,8 +14,8 @@ export default function Home() {
       <section className="page-section">
         <Todo />
         <Crypto />
-        <PageFooter />
       </section>
+      <PageFooter />
     </main>
   );
 }
