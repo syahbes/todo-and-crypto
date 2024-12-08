@@ -4,7 +4,7 @@ const sass = require('gulp-sass')(require('sass'));
 gulp.task('sass', function() {
   return gulp.src('src/styles/main.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('src/styles')); // Changed from 'public/css' to 'src/styles'
+    .pipe(gulp.dest('src/styles'));
 });
 
 gulp.task('watch', function() {

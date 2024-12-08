@@ -7,7 +7,6 @@ export default function PageFooter() {
       sx={{
         py: 2,
         textAlign: "center",
-        // color: "text.secondary",
         color: "#8A8B8D",
         mt: "auto"
       }}

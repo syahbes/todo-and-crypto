@@ -30,7 +30,7 @@ const DoughnutChart: React.FC<DoughnutChartProps> = ({ coins }) => {
         datasets: [
           {
             data: coins.map((coin) => coin.price),
-            backgroundColor: ["#8BCFE8", "#9FC1D1", "#DDE9F2"], // Blue palette
+            backgroundColor: ["#8BCFE8", "#9FC1D1", "#DDE9F2"],
             borderWidth: 0.5,
             borderColor: "#7FA2B1",
           },

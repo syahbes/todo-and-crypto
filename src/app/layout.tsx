@@ -1,7 +1,5 @@
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
 
 import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
@@ -14,17 +12,6 @@ const roboto = Roboto({
   display: "swap",
   variable: "--font-roboto",
 });
-
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
 
 export const metadata: Metadata = {
   title: "Finnancer Todo and Crypto",

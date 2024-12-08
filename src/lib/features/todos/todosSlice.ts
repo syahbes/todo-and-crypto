@@ -14,7 +14,6 @@ const initialState: TodosState = {
   error: null,
 };
 
-// Create async thunk
 export const fetchTodosAsync = createAsyncThunk(
   "todos/fetchTodos",
   async (_, { rejectWithValue }) => {
@@ -65,10 +64,8 @@ export const todosSlice = createSlice({
   },
 });
 
-// Regular actions
 export const { addTodo, toggleTodo } = todosSlice.actions;
 
-// Selectors
 export const selectTodos = (state: RootState) => state.todos.todos;
 export const selectTodosLoading = (state: RootState) => state.todos.loading;
 export const selectTodosError = (state: RootState) => state.todos.error;

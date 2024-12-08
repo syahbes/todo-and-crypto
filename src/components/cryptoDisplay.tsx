@@ -26,7 +26,7 @@ const CryptoDisplay = () => {
 
     fetchData();
 
-    // Refresh data every 2 minutes
+    // Refresh data every 2 minutes to simulate real-time data
     const interval = setInterval(fetchData, 120000);
 
     return () => clearInterval(interval);
