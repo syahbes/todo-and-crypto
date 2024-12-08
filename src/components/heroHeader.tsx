@@ -3,7 +3,7 @@ import { Box, Container, Typography } from "@mui/material";
 export default function HeroHeader() {
   return (
     <Box
-      // m={1}
+      mb={{ xs: 1, md: 3 }}
       sx={{
         backgroundImage: "url('/header_bg.png')",
         backgroundSize: "cover",

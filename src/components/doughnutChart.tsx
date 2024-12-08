@@ -3,7 +3,6 @@ import { Coin } from "@/types";
 import { Chart } from "chart.js/auto";
 import { useEffect, useRef } from "react";
 
-
 interface DoughnutChartProps {
   coins: Coin[];
 }
@@ -32,10 +31,13 @@ const DoughnutChart: React.FC<DoughnutChartProps> = ({ coins }) => {
           {
             data: coins.map((coin) => coin.price),
             backgroundColor: ["#8BCFE8", "#9FC1D1", "#DDE9F2"], // Blue palette
+            borderWidth: 0.5,
+            borderColor: "#7FA2B1",
           },
         ],
       },
       options: {
+        cutout: '70%',
         plugins: {
           legend: {
             position: "top" as const,
@@ -54,7 +56,7 @@ const DoughnutChart: React.FC<DoughnutChartProps> = ({ coins }) => {
 
   return (
     <div style={{ width: "300px", height: "300px" }}>
-      <canvas ref={chartRef} />;
+      <canvas ref={chartRef} />
     </div>
   );
 };
