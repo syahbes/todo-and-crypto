@@ -6,6 +6,10 @@ export async function GET() {
       "https://sandbox-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=ETH,USDT,USDC",
       {
         headers: {
+          // #############################
+          // NOTE I WILL NEVER SHARE API KEY
+          // IN PRODUCTION WILL BE STORED IN .env
+          // #############################
           "X-CMC_PRO_API_KEY": "b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c",
           Accept: "*/*",
         },
@@ -22,7 +26,7 @@ export async function GET() {
     const transformedData = {
       status: data.status,
       data: Object.entries(data.data).map(([symbol, coinData]) => {
-        const coin = (coinData as any)[0]; // Take the first item from the array
+        const coin = (coinData as any)[0];
         return {
           name: getNameBySymbol(symbol),
           symbol: coin.symbol,
