@@ -8,14 +8,13 @@ export default function HeroHeader() {
         backgroundImage: "url('/header_bg.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        width: "100%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
       }}
       borderRadius={3}
-      p={1}>
+      p={2}>
       <Typography
         variant="h3"
         sx={{
