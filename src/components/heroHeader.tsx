@@ -24,7 +24,7 @@ export default function HeroHeader() {
         color="primary.contrastText"
         mb={0}
         gutterBottom>
-        Financer.com
+        Financer
       </Typography>
       <Typography
         variant="h5"
@@ -33,7 +33,7 @@ export default function HeroHeader() {
         }}
         mb={2}
         color="primary.contrastText">
-        Interview Exam
+        Next JS, MUI, Redux
       </Typography>
       <Typography
         variant="subtitle1"
@@ -44,7 +44,7 @@ export default function HeroHeader() {
         color="primary.contrastText"
         gutterBottom
         mb={0}>
-        Candidate: Shlomi Yahbes
+        Shlomi Yahbes
       </Typography>
     </Box>
   );
