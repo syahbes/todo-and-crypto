@@ -2,6 +2,14 @@
 
 A web application that combines task management capabilities with real-time cryptocurrency data visualization, built with modern web technologies.
 
+## Live Demo
+
+This project is deployed via Vercel and you can explore the live demo at:
+[https://todo-and-crypto.vercel.app/](https://todo-and-crypto.vercel.app/)
+
+## Screenshot
+<img width="1785" height="817" alt="image" src="https://github.com/user-attachments/assets/d9199500-32f2-44d6-b6dd-8e3c9d19e79c" />
+
 ## Features
 
 ### Task Management
@@ -84,10 +92,3 @@ src/
 The application uses Next.js API routes to handle external API calls:
 - `/api/todos` - Handles task-related operations
 - `/api/crypto` - Fetches cryptocurrency data
-
-## Live Demo
-
-This project is deployed via Vercel and you can explore the live demo at:
-[https://todo-and-crypto.vercel.app/](https://todo-and-crypto.vercel.app/)
-
-> Experience the full functionality of both the task management system and real-time cryptocurrency dashboard in action.
